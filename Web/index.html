@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chăm sóc cải IoT</title>
+
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/toastMessage.css">
+    <link rel="shortcut icon" type="png" href="./assets/img/logo.png"/>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff" rel="stylesheet">
+    
+    <link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css.min.css"/>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+</head>
+
+
+<!-- _______________________________________ -->
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 3 100 100">
+    <defs>
+        <style>
+            @keyframes rotate {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            .out-top {
+                animation: rotate 20s linear infinite;
+                transform-origin: 13px 25px;
+            }
+            .in-top {
+                animation: rotate 15s linear infinite;
+                transform-origin: 13px 25px;
+            }
+            .out-bottom {
+                animation: rotate 30s linear infinite;
+                transform-origin: 84px 93px;
+            }
+            .in-bottom {
+                animation: rotate 15s linear infinite;
+                transform-origin: 84px 93px;
+            }
+        </style>
+    </defs>
+    <path fill="#6495ED" class="out-top" d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z"/>
+    <path fill="#b1b1ff" class="in-top" d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z"/>
+    <path fill="#40E0D0" class="out-bottom" d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z"/>
+    <path fill="#9FE2BF" class="in-bottom" d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z"/>
+</svg>
+<!-- _________________________________________________________________-->
+<div>
+    <main>
+    <section class="glass">
+        <div class="content">
+            <div>
+                <script>
+                (function(d, s, id) {
+                    if (d.getElementById(id)) {
+                        if (window.__TOMORROW__) {
+                            window.__TOMORROW__.renderWidget();
+                        }
+                        return;
+                    }
+                    const fjs = d.getElementsByTagName(s)[0];
+                    const js = d.createElement(s);
+                    js.id = id;
+                    js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+        
+                    fjs.parentNode.insertBefore(js, fjs);
+                })(document, 'script', 'tomorrow-sdk');
+                </script>
+        
+                <div class="tomorrow"
+                   data-location-id="130202"
+                   data-language="EN"
+                   data-unit-system="METRIC"
+                   data-skin="light"
+                   data-widget-type="aqiPollutant"
+                   style="margin-left: 1.5%; margin-right: 1.5%;
+                        position:center; padding-bottom: 10px"
+                >
+                </div>
+            </div>
+            
+            <div class="content__row">
+                <div class="content__item content__bg-img1">
+                    <div class="content__item-link">
+                        <span class="item-name">Thời gian:</span>
+                        <div class="today"><span id ='times'></span><span id="day"></span></div>
+                    </div>
+                </div>
+
+                <div class="content__item content__bg-img2">
+                    <div class="content__item-link">
+                        <span class="item-name">Nhiệt độ:</span>
+                        <div class="item-name-value"><span id = 'temp'></span><span class="unit">°C</span></div>
+                    </div>
+                </div>
+
+                <div class="content__item content__bg-img3">
+                    <div class="content__item-link">
+                        <span class="item-name">Độ ẩm:</span>
+                        <div class="item-name-value"><span id = 'humidity'></span><span class="unit">%</span></div>
+                    </div>
+                </div>
+
+                <div class="content__item content__bg-img4">
+                    <div class="content__item-link">
+                        <span class="item-name">Độ ẩm đất:</span>
+                        <div class="item-name-value"><span id = 'water-droplet'></span><span class="unit">%</span></div>
+                    </div>
+                </div>
+        
+                <div class="content__item content__bg-img5">
+                    <div class="content__item-link">
+                        <span class="item-name">Cường độ ánh sáng:</span>
+                        <div class="item-name-value"><span id = 'insensity'></span><span class="unit">Lux</span></div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="content__chart">
+                <div class="content__chart-list">
+                    <div class="content__chart-list-item">
+                        <iframe class="fig" src="https://thingspeak.com/channels/2053165/charts/1?bgcolor=%23ffffff&color=%23309CC3&dynamic=true&result=40&title=Nhi%E1%BB%87t+%C4%91%E1%BB%99&type=line&yaxis=Temperature&width=auto&height=auto"></iframe>
+                    </div>
+                    <div class="content__chart-list-item">
+                        <iframe class="fig" src="https://thingspeak.com/channels/2053165/charts/2?bgcolor=%23ffffff&color=%23309CC3&dynamic=true&result=20&title=%C4%90%E1%BB%99+%E1%BA%A9m&type=spline&yaxis=Humidity&width=auto&height=auto"></iframe>
+                    </div>
+                    <div class="content__chart-list-item">
+                        <iframe class="fig" src="https://thingspeak.com/channels/2053165/charts/3?bgcolor=%23ffffff&color=%23309CC3&dynamic=true&results=20&title=%C4%90%E1%BB%99+%E1%BA%A9m+%C4%91%E1%BA%A5t&type=spline&yaxis=GroundHumidity&width=auto&height=auto"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="device">
+                <!-- off -->
+                <div class="device__row">
+                </div>
+            </div>
+            
+        </div>
+        
+    </section>
+    <div id="toast"></div>
+    </main>
+</div>
+<div>
+    <nav>
+        <ul>
+            <li><a href="#" class="logo">
+                <img src="./assets/img/logo.png" alt="">
+                <span class="nav-item">CÔNGxDŨNG</span>
+                </a></li>
+            <li><a href="./index.html">
+                <i class="fas fa-home"></i>
+                <span class="nav-item">Home</span>
+                </a></li>
+            <li><a href="./assets/pages/profile.html">
+                <i class="fas fa-user"></i>
+                <span class="nav-item">Profile</span>
+                </a></li>
+            <li><a href="./assets/pages/setting.html" class="">
+                <i class="fas fa-cog"></i>
+                <span class="nav-item">Setting</span>
+                </a></li>
+            <li><a href="./assets/pages/logout.html" class="logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="nav-item">Log out</span>
+                </a></li>
+        </ul>
+    </nav>
+</div>
+<!-- _________________________________________________ -->
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/time.js"></script>
+    
+</body>
+<!-- _______________________________________ -->
+
+</html>

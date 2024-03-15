@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;700&display=swap');
+
+
+
+body {
+  font-family: 'Red Hat Text', sans-serif;
+}
+
+.container {
+  text-align: center;
+  color: #fff;
+  width: 100%;
+  min-height: 97vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../img/logout.jpg);
+  background-size: cover;
+  background-position: fixed;
+  
+/*  this is where the magic happens:  */
+  background-attachment: fixed;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3rem;
+  background-color: #00000063;
+}
+
+p {
+  max-width: 52ch;
+  line-height: 1.5;
+  padding: 1em;
+  border-style: dotted;
+  text-shadow: 2px 2px 4px #000;
+  font-size: 1.5rem ;
+}
+
+a {
+  display:inline-block;
+  padding: 1em 3.5em;
+  background-color: #96eb5cd8;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 0.5em;
+  font-weight: 600;
+  letter-spacing: .5px;
+  font-size: .875rem;
+}
